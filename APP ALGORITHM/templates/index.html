@@ -1,0 +1,144 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='authenticate.css')}}"
+    />
+    <link rel="icon" href="{{ url_for('static', filename='images/flask-logo.svg') }}" type="image/x-icon">   
+</head>
+<body>
+
+  <div class="wrapper" id="signUp" style="display:none">
+    <form method="POST" action="/register">
+        <img style="width: 202px; height: 62px; border-radius: 5px; padding: 12px; position: relative; left: 62px;" src="{{url_for('static',filename='/images/diamond_swalayan_logo.png')}}" class="logo">
+        <h1>REGISTER</h1>
+        <div class="input-box">
+            <input type="user" id="email" name="email" placeholder="Enter your email" required>
+            <i class='bx bxs-envelope'></i>
+        </div>
+        <div class="input-box">
+            <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+        <div class="checkResult">
+            <span id="upperCase" class="invalid"><i class="bx bxs-shield-x"></i> Contain Upper Letter</span>
+            <span id="lowerCase" class="invalid"><i class="bx bxs-shield-x"></i> Contain Lower Letter</span>
+            <span id="numberPat" class="invalid"><i class="bx bxs-shield-x"></i> Contain Number</span>
+            <span id="symbolPat" class="invalid"><i class="bx bxs-shield-x"></i> Contain Symbol</span>
+        </div>
+        <button type="submit" class="btn">Register</button>
+        <div class="register-link">
+            <p>Already have an account yet?</p>
+            <button class="sign-btn" id="signInButton">Sign In</button>
+        </div>
+    </form>
+</div>
+<div class="wrapper" id="signIn">
+    <form method="POST" action="/login">
+        <img style="width: 202px; height: 62px; border-radius: 5px; padding: 12px; position: relative; left: 62px;" src="{{url_for('static',filename='/images/diamond_swalayan_logo.png')}}" class="logo">
+        <h1>LOGIN</h1>
+        <div class="input-box">
+            <input type="user" id="username" name="email" placeholder="Email" required>
+            <i class='bx bxs-envelope'></i>
+        </div>
+        <div class="input-box">
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+        <button type="submit" class="btn">Enter</button>
+        <div class="register-link">
+            <p>Don't have an account yet?</p>
+            <button class="sign-btn" id="signUpButton">Sign Up</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Menggunakan jQuery untuk mengirim data ke server
+  $('#loginForm').submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: '/',
+      type: 'POST',
+      data: $(this).serialize(),
+      success: function(response) {
+        if (response.success) {
+          // Redirect ke halaman utama jika berhasil
+          window.location.href = '/'
+        } else {
+          // Tampilkan pesan error
+          alert(response.error);
+        }
+      }
+    });
+  });
+
+  const signUpButton = document.getElementById('signUpButton');
+  const signInButton = document.getElementById('signInButton');
+  const signInForm = document.getElementById('signIn');
+  const signUpForm = document.getElementById('signUp');
+
+  signUpButton.addEventListener('click', function () {
+      signInForm.style.display = "none";
+      signUpForm.style.display = "block";
+  });
+
+  signInButton.addEventListener('click', function () {
+      signInForm.style.display = "block";
+      signUpForm.style.display = "none";
+  });
+
+  document.getElementById("password").addEventListener("input", function () {
+      const password = this.value
+      const upperCasePattern = /[A-Z]/
+      const lowerCasePattern = /[a-z]/
+      const numberPattern = /[0-9]/
+      const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/
+
+      updateValidation(
+          "upperCase",
+          upperCasePattern.test(password)
+      )
+
+      updateValidation(
+          "lowerCase",
+          lowerCasePattern.test(password)
+      )
+
+      updateValidation(
+          "numberPat",
+          numberPattern.test(password)
+      )
+
+      updateValidation(
+          "symbolPat",
+          specialCharPattern.test(password)
+      )
+  })
+
+  function updateValidation(elementId,isValid){
+      const element = document.getElementById(elementId)
+      const icon = element.querySelector("i")
+
+      if(isValid){
+          element.classList.remove("invalid")
+          element.classList.add("valid")
+          icon.classList.remove("bxs-shield-x")
+          icon.classList.add("bxs-check-shield")
+      }else{
+          element.classList.remove("valid")
+          element.classList.add("invalid")
+          icon.classList.remove("bxs-check-shield")
+          icon.classList.remove("bxs-shield-x")
+      }
+  }
+
+</script>
+</body>
+</html>

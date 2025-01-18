@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Result</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='result.css')}}"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='images/flask-logo.svg') }}"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="nav-container">
+        <p>
+          <img
+            src="{{url_for('static',filename='images/check2.svg')}}"
+            alt=""
+          />
+          Result Page
+        </p>
+        <div class="btnLogout">
+          <button
+            id="logoutButton"
+            style="background-color: rgb(248, 67, 67); border-radius: 32px"
+          >
+            <img
+              style="width: 18px"
+              src="{{url_for('static',filename='/images/logout-svgrepo-com.png')}}"
+              class="logo"
+            />
+            Logout
+          </button>
+        </div>
+      </div>
+      
+    </div>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <img style="width: 202px; height: 82px;" src="{{url_for('static',filename='/images/diamond_swalayan_logo.png')}}" class="logo">
+      </div>
+      <ul class="side-text">
+        <hr width="80%" />
+        <li>
+          <a href="" id="mainPage" style="font-weight: lighter"
+            ><img
+              src="{{url_for('static', filename='images/home.svg')}}"
+              class="logo"
+              alt=""
+            />
+            Main
+          </a>
+        </li>
+        <hr width="80%" />
+        <li>
+          <a href="" id="soldDataPage" style="font-weight: lighter"
+            ><img
+              src="{{url_for('static', filename='images/sale.svg')}}"
+              class="logo"
+              alt=""
+            />
+            Sale</a
+          >
+        </li>
+        <li>
+          <a href="" id="processDataPage" style="font-weight: lighter"
+            ><img
+              src="{{url_for('static', filename='images/repeat.svg')}}"
+              class="logo"
+              alt=""
+            />
+            Predicted
+          </a>
+        </li>
+        <li>
+          <a href="" id="adminDashboardPage" style="font-weight: lighter"
+            ><img
+              src="{{url_for('static', filename='images/admin.svg')}}"
+              class="logo"
+              alt=""
+            />
+            Admin
+          </a>
+        </li>
+        <hr width="80%" />
+      </ul>
+    </aside>
+
+    <div class="resultAssociationTable">
+      <h2 class="resultAssociationtTitle">Transaction Data Table:</h2>
+      {{ result1|safe }}
+    </div>
+
+    <div class="resultItemCountTable">
+      <h2 class="resultAssociationtTitle">Item Count Table:</h2>
+      {{ result3|safe }}
+    </div>
+
+    <div class="resultFrequentItemsTable">
+      <h2 class="resultAssociationtTitle">Frequent Items:</h2>
+      {{ result6|safe }}
+    </div>
+
+    <div class="resultAssociationRulesTable">
+      <h2 class="resultAssociationtTitle">Association Rules:</h2>
+      {{ result7|safe }}
+    </div>
+    
+  </body>
+  <script>
+    document
+      .getElementById("logoutButton")
+      .addEventListener("click", function () {
+        window.location.href = "/";
+      });
+
+    document
+      .getElementById("mainPage")
+      .addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = "https://ea61-149-102-239-228.ngrok-free.app/home";
+      });
+
+    document
+      .getElementById("soldDataPage")
+      .addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = "https://ea61-149-102-239-228.ngrok-free.app/soldDataPage";
+      });
+
+    document
+      .getElementById("processDataPage")
+      .addEventListener("click", function () {
+        window.location.href = "/";
+      });
+
+    document
+      .getElementById("adminDashboardPage")
+      .addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = "https://ea61-149-102-239-228.ngrok-free.app/adminDashBoardPage";
+      });
+  </script>
+</html>

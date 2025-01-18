@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sale</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='sale.css')}}"
+    />
+    <link rel="icon" href="{{ url_for('static', filename='images/flask-logo.svg') }}" type="image/x-icon">   
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="nav-container">
+        <p><img src="{{url_for('static',filename='/images/sale2.svg')}}" alt="" /> Sale Page</p>
+        <div class="btnLogout">
+            <button id="logoutButton" style="background-color: rgb(248, 67, 67); border-radius:32px;">
+              <img style="width: 18px;" src="{{url_for('static',filename='/images/logout-svgrepo-com.png')}}" class="logo">
+              Logout
+            </button>
+          </div>
+      </div>
+      
+    </div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <img style="width: 202px; height: 82px; border-radius: 5px;" src="{{url_for('static',filename='/images/diamond_swalayan_logo.png')}}" class="logo">
+        </div>
+        <ul class="side-text">
+          <hr width="80%" />
+          <li>
+            <a href="" id="mainPage" style="font-weight: lighter"
+              ><img
+                src="{{url_for('static', filename='images/home.svg')}}"
+                class="logo"
+                alt=""
+              />
+              Main</a
+            >
+          </li>
+          <hr width="80%" />
+          <li>
+            <a href="" id="soldDataPage" style="font-weight: lighter"
+              ><img
+                src="{{url_for('static', filename='images/sale.svg')}}"
+                class="logo"
+                alt=""
+              />
+              Sale</a
+            >
+          </li>
+          <li>
+            <a href="" id="processDataPage" style="font-weight: lighter"
+              ><img
+                src="{{url_for('static', filename='images/repeat.svg')}}"
+                class="logo"
+                alt=""
+              />
+              Predicted</a
+            >
+          </li>
+          <li>
+            <a href="" id="adminDashboardPage" style="font-weight: lighter"
+              ><img
+                src="{{url_for('static', filename='images/admin.svg')}}"
+                class="logo"
+                alt=""
+              />
+              Admin</a
+            >
+          </li>
+          <hr width="80%" />
+          
+        </ul>
+      </aside>
+
+    <div class="itemAndTable">
+      <div class="itemTableTitle">
+        <p>LIST OF SALE TRANSACTION</p>
+        <div class="deleteInputDataBtn"> 
+          <form action="/export" method="post">
+            <button type="submit" id="exportBtn" style="background-color:#a47148; font-weight: bold;">SAVE 📩</button>
+          </form>
+        
+          
+        </div>
+        <button
+            style="background-color: #a47148; font-weight: bold; position: relative; left: 660px; bottom: 35px;"
+            class="modal-btn-display"
+          >
+            ADD 🛒
+          </button>
+      </div>
+      <div class="tableOfItem" id="salesTable">
+        <table>
+          <tr>
+            <th style="font-size: 10.5px;">No</th>
+            <th style="font-size: 10.5px;">Transaction</th>
+            <th style="font-size: 10.5px;">Item</th>
+            <th style="font-size: 10.5px;">Date Time</th>
+            <th style="font-size: 10.5px;">Period Day</th>
+            <th style="font-size: 10.5px;">Weekday Weekend</th>
+            <th style="font-size: 10.5px;">Action</th>
+          </tr>
+          {% for sale in sales.items %}
+          <tr id="row-{{ sale.id }}">
+            <td >{{ sale.id }}</td>
+            <td >{{ sale.transaction }}</td>
+            <td >{{ sale.item }}</td>
+            <td >{{ sale.date_time }}</td>
+            <td >{{ sale.period_day }}</td>
+            <td >{{ sale.weekday_weekend }}</td>
+            <td>
+              <div class="editDeleteItemBtn">
+                <a
+                  style="
+                    background-color: #40916c;
+                    padding: 5px;
+                    border-radius: 2px;
+                  "
+                  href="/editSale/{{ sale.id }}"
+                  >📝</a
+                >
+                <a
+                  style="
+                    background-color: #e85d00;
+                    padding: 5px;
+                    border-radius: 2px;
+                  "
+                  href="#"
+                  class="delete-button"
+                  data-id="{{ sale.id }}"
+                  >🗑️</a
+                >
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="paginateButton">
+        {% if sales.has_prev %}
+            <a href="{{ url_for('sales', page=sales.prev_num) }}">Previous</a>
+        {% endif %}
+        
+        {% for page in sales.iter_pages() %}
+            {% if page %}
+                <a href="{{ url_for('sales', page=page) }}" class="{% if page == sales.page %}active{% endif %}">{{ page }}</a>
+            {% else %}
+                <span>...</span>
+            {% endif %}
+        {% endfor %}
+
+        {% if sales.has_next %}
+            <a href="{{ url_for('sales', page=sales.next_num) }}">Next</a>
+        {% endif %}
+    </div>
+
+    <form action="/addSaleData" method="POST">
+      <div class="modal-overlay">
+        <div class="modal-container">
+          <h3>Please input item name and item id for add a new items!</h3>
+          <div class="input-items-position">
+            <input type="text" name="id" placeholder="Input id" required />
+            <input
+              type="text"
+              name="transaction"
+              placeholder="Input Transaction"
+              required
+            />
+            <input
+              type="text"
+              name="items"
+              placeholder="Input Items"
+              required
+            />
+            <input
+              type="text"
+              name="dateTime"
+              placeholder="Input Date Time"
+              required
+            />
+            <input
+              type="text"
+              name="periodDay"
+              placeholder="Input Period Day"
+              required
+            />
+            <input
+              type="text"
+              name="weekendWeekday"
+              placeholder="Input Weekend Weekday"
+              required
+            />
+          </div>
+          <div class="add-items-position">
+            <button type="submit" class="modal-accept-btn">ACCEPT</button>
+            <button class="modal-close-btn">CANCEL</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <script>
+      function exportData() {
+        fetch('/export', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ /* data to send */ })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const deleteButtons = document.querySelectorAll('.delete-button');
+  
+      deleteButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+          event.preventDefault(); // Mencegah link default
+  
+          const id = this.getAttribute('data-id');
+          if (confirm('Apakah Anda yakin ingin menghapus item ini?')) {
+            fetch(`/delete/${id}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                // Menghapus baris dari tabel
+                const row = document.getElementById(`row-${id}`);
+                if (row) {
+                  row.remove();
+                }
+              } else {
+                alert('Gagal menghapus data: ' + (data.error || 'Terjadi kesalahan.'));
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert('Terjadi kesalahan saat menghapus data.');
+            });
+          }
+        });
+      });
+    });
+
+      const tableOfBody = document.querySelector(".tableOfItem table");
+      const deleteAllSaleButton = document.getElementById("delete-all-data");
+
+      const modalBtns = document.querySelectorAll(".modal-btn-display");
+      const modals = document.querySelectorAll(".modal-overlay");
+      const closeBtns = document.querySelectorAll(".modal-close-btn");
+
+      modalBtns.forEach((modalBtn, index) => {
+        modalBtn.addEventListener("click", function (event) {
+          event.preventDefault();
+          modals[index].classList.add("open-modal");
+        });
+      });
+
+      closeBtns.forEach((closeBtn, index) => {
+        closeBtn.addEventListener("click", function (event) {
+          event.preventDefault();
+          modals[index].classList.remove("open-modal");
+        });
+      });
+
+      document
+      .getElementById("logoutButton")
+      .addEventListener("click", function () {
+        window.location.href = "/logout";
+      });
+
+    document
+      .getElementById("mainPage")
+      .addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = "/home";
+      });
+
+    document
+      .getElementById("soldDataPage")
+      .addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = "/sale";
+      });
+
+    document
+      .getElementById("processDataPage")
+      .addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = "/process";
+      });
+
+    document
+      .getElementById("adminDashboardPage")
+      .addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = "/admin";
+      });
+    </script>
+  </body>
+</html>

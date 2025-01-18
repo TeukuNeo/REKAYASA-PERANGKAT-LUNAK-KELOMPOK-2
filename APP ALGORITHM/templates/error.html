@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Failed to process</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='images/flask-logo.svg') }}"
+      type="image/x-icon"
+    />
+    <style>
+        body {
+            background-color: violet;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        h1 {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            text-align: center;
+            font-size: 50px;
+        }
+
+        .text-status {
+            display: grid;
+            grid-template-columns: repeat(1,720px);
+        }
+
+        p {
+            text-align: center;
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="text-status">
+        <h1>Upps, Sorry error 404 occured</h1>
+        <p>This is purely an unintentional error, but it seems this is not the page you are looking for, we apologize
+            for the inconvenience.</p>
+    </div>
+
+</body>
+
+</html>

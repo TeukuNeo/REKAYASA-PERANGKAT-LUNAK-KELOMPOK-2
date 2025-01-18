@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='admin.css')}}"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='images/flask-logo.svg') }}"
+      type="image/x-icon"
+    />
+     
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="nav-container">
+        <p>
+          <img
+            src="{{url_for('static', filename='/images/admin2.svg')}}"
+            alt=""
+          />
+          Admin Page
+        </p>
+        <div class="btnLogout">
+          <button
+            id="logoutButton"
+            style="background-color: rgb(248, 67, 67); border-radius: 32px"
+          >
+            <img
+              style="width: 18px"
+              src="{{url_for('static',filename='/images/logout-svgrepo-com.png')}}"
+              class="logo"
+            />
+            Logout
+          </button>
+        </div>
+      </div>
+      
+    </div>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <img style="width: 202px; height: 82px; border-radius: 5px;" src="{{url_for('static',filename='/images/diamond_swalayan_logo.png')}}" class="logo">
+      </div>
+      <ul class="side-text">
+        <hr width="80%" />
+        <li>
+          <a href="/home" id="mainPage" style="font-weight: lighter"
+            ><img
+              src="{{url_for('static', filename='images/home.svg')}}"
+              class="logo"
+              alt=""
+            />
+            Main</a
+          >
+        </li>
+        <hr width="80%" />
+        <li>
+          <a href="/sale" id="soldDataPage" style="font-weight: lighter"
+            ><img
+              src="{{url_for('static', filename='images/sale.svg')}}"
+              class="logo"
+              alt=""
+            />
+            Sale</a
+          >
+        </li>
+        <li>
+          <a href="/process" id="processDataPage" style="font-weight: lighter"
+            ><img
+              src="{{url_for('static', filename='images/repeat.svg')}}"
+              class="logo"
+              alt=""
+            />
+            Predicted</a
+          >
+        </li>
+        <li>
+          <a href="" id="adminDashboardPage" style="font-weight: lighter"
+            ><img
+              src="{{url_for('static', filename='images/admin.svg')}}"
+              class="logo"
+              alt=""
+            />
+            Admin</a
+          >
+        </li>
+        <hr width="80%" />
+      </ul>
+    </aside>
+
+    <div class="itemAndTable">
+      <div class="itemTableTitle">
+        <p>LIST OF EMPLOYEE EMAIL</p>
+        <div class="deleteInputDataBtn">
+          <button
+            style="background-color: #e85d04; font-weight: bold"
+            class="modal-btn-display"
+          >
+            DELETE ACCOUNT
+          </button>
+        </div>
+      </div>
+      <div class="tableOfItem">
+        <table>
+          <tr>
+            <td>Email</td>
+          </tr>
+          {% for users in user %}
+          <tr>
+            <td>{{ users.email }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+    <form action="/deleteAccount" method="POST">
+      <div class="modal-overlay">
+        <div class="modal-container">
+          <h3>Please input email before delete this account!</h3>
+          <div class="input-account-position">
+            <input
+              id="myInput"
+              type="text"
+              name="email"
+              placeholder="Input email"
+              required
+            />
+          </div>
+          <div class="add-account-position">
+            <button
+              type="submit"
+              onclick="validateForm()"
+              class="modal-accept-btn"
+            >
+              ACCEPT
+            </button>
+            <button class="modal-close-btn">CANCEL</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <script>
+
+        document
+        .getElementById("logoutButton")
+        .addEventListener("click", function () {
+          window.location.href = "/login";
+        });
+
+      document
+        .getElementById("mainPage")
+        .addEventListener("click", function () {
+          window.location.href = "/home";
+        });
+
+      document
+        .getElementById("soldDataPage")
+        .addEventListener("click", function () {
+          window.location.href = "/sale";
+        });
+
+      document
+        .getElementById("processDataPage")
+        .addEventListener("click", function () {
+          window.location.href = "/process";
+        });
+
+      const modalBtns = document.querySelectorAll(".modal-btn-display");
+      const modals = document.querySelectorAll(".modal-overlay");
+      const closeBtns = document.querySelectorAll(".modal-close-btn");
+
+      modalBtns.forEach((modalBtn, index) => {
+        modalBtn.addEventListener("click", function (event) {
+          event.preventDefault();
+          modals[index].classList.add("open-modal");
+        });
+      });
+
+      closeBtns.forEach((closeBtn, index) => {
+        closeBtn.addEventListener("click", function (event) {
+          event.preventDefault();
+          modals[index].classList.remove("open-modal");
+        });
+      });
+
+     
+    </script>
+  </body>
+</html>

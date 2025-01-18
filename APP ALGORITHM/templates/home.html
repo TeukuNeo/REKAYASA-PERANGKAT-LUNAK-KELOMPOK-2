@@ -1,0 +1,161 @@
+<html lang="en">
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" href="css/home.css">
+  <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='home.css')}}"
+    />
+    <link rel="icon" href="{{ url_for('static', filename='images/flask-logo.svg') }}" type="image/x-icon">   
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="nav-container">
+          <p><img src="{{ url_for('static',filename='/images/home2.svg')}}" alt=""> Home Page</p>
+          <div class="btnLogout">
+            <button id="logoutButton" style="background-color: rgb(248, 67, 67); border-radius:32px;">
+              <img style="width: 18px;" src="{{url_for('static',filename='/images/logout-svgrepo-com.png')}}" class="logo">
+              Logout
+            </button>
+          </div>
+        </div>
+        
+      </div>
+    
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <img style="width: 202px; height: 82px; border-radius: 5px;" src="{{url_for('static',filename='/images/diamond_swalayan_logo.png')}}" class="logo">
+        </div>
+        <ul class="side-text">
+          <hr width="80%" />
+          <li>
+            <a href="" id="mainPage" style="font-weight: lighter"
+              ><img
+                src="{{url_for('static', filename='images/home.svg')}}"
+                class="logo"
+                alt=""
+              />
+              Main</a
+            >
+          </li>
+          <hr width="80%" />
+          <li>
+            <a href="" id="soldDataPage" style="font-weight: lighter"
+              ><img
+                src="{{url_for('static', filename='images/sale.svg')}}"
+                class="logo"
+                alt=""
+              />
+              Sale</a
+            >
+          </li>
+          <li>
+            <a href="" id="processDataPage" style="font-weight: lighter"
+              ><img
+                src="{{url_for('static', filename='images/repeat.svg')}}"
+                class="logo"
+                alt=""
+              />
+              Predicted</a
+            >
+          </li>
+          <li>
+            <a href="" id="adminDashboardPage" style="font-weight: lighter"
+              ><img
+                src="{{url_for('static', filename='images/admin.svg')}}"
+                class="logo"
+                alt=""
+              />
+              Admin</a
+            >
+          </li>
+          <hr width="80%" />
+          
+        </ul>
+      </aside>
+    
+      <section class="mainSection">
+        <div class="mainTitle">
+          <p>PAGE MENU OPTIONS</p>
+          <div class="mainContainer" >
+            <div class="mainContent" id="pageMessage-1" data-message="Note for sale page:" data-additional-message="This page is a page that contains a list of transactions via an Excel file in CSV format.">
+              <h3 class="contentText">Sale Data</h3>
+              <img src="{{url_for('static', filename='/images/sale-03-svgrepo-com.svg')}}" alt="box-img" class="quality-svg">
+            </div>
+            <div class="mainContent" id="pageMessage-2" data-message="Note for process page:" data-additional-message="This page is the most important page because on this page the apriori algorithm calculation process takes place.">
+              <h3 class="contentText">Predicted Data</h3>
+              <img src="{{url_for('static', filename='/images/repeat-svgrepo-com.png')}}" alt="box-img" class="quality-svg">
+            </div>
+            <div class="mainContent" id="pageMessage-3" data-message="Note for admin page:" data-additional-message="This page is a page where only admins can manage emails from each account owned by employees.">
+              <h3 class="contentText">Admin Data</h3>
+              <img src="{{url_for('static', filename='/images/administrator.png')}}" alt="box-img" class="quality-svg">
+            </div>
+          </div>
+        </div>
+      </section>
+    
+      <div class="home-menu-modal-overlay">
+        <div class="home-menu-modal-container">
+          <h3 id="modalMessage"></h3>
+          <p id="modalMessageContent"></p>
+          <button class="home-menu-close-btn">❌</button>
+        </div>
+      </div>
+    
+      <script>
+    
+       
+        document.getElementById("pageMessage-1").addEventListener('click', function () {
+          window.location.href = "/sale"
+        })
+    
+        document.getElementById("pageMessage-2").addEventListener('click', function () {
+          window.location.href = "/process"
+        })
+    
+        document.getElementById("pageMessage-3").addEventListener('click', function () {
+          window.location.href = "/admin"
+        })    
+    
+        document
+        .getElementById("logoutButton")
+        .addEventListener("click", function () {
+          window.location.href = "/logout";
+        });
+
+      document
+        .getElementById("mainPage")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          window.location.href = "/home";
+        });
+
+      document
+        .getElementById("soldDataPage")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          window.location.href = "/sale";
+        });
+
+      document
+        .getElementById("processDataPage")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          window.location.href = "/process";
+        });
+
+      document
+        .getElementById("adminDashboardPage")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          window.location.href = "/admin";
+        });
+    
+      </script>
+
+</body>
+
+</html>

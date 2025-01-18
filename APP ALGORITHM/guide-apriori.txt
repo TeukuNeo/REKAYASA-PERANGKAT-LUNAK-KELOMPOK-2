@@ -1,0 +1,51 @@
+This is was an important notes for you,
+if you want to use apriori algorithms
+make sure you device, i mean your pc or laptop
+have a compatible specification.
+For my pc specification is Windows 11, 8 GB Ram, 
+500 GB Storage SSD, Intel Core i5, and Intel irisxe graphics.
+For the programming language i'm use two technology.
+so why did i use two techonology why not one? because the data
+transaction management and algorithms calculate it supposed to
+separates because the calculate part was pretty hard. so that
+i want to make my calculate easier i'm use python for calculate
+and data transaction management and also authentication im use node js.
+
+ - Teuku Neo -
+
+ const dataItemBoxes = document.querySelectorAll(".mainContent");
+    const modal = document.querySelector(".home-menu-modal-overlay");
+    const closeBtn = document.querySelector(".home-menu-close-btn");
+    const modalMessageTitle = document.getElementById("modalMessage");
+    const modalMessageContent = document.getElementById("modalMessageContent");
+
+    function openModal(event) {
+      event.preventDefault();
+      modal.classList.add("open-modal");
+    }
+
+    dataItemBoxes.forEach(dataItemBox => {
+      dataItemBox.addEventListener("click", (event) => {
+        openModal(event);
+        modalMessageTitle.textContent = dataItemBox.dataset.message;
+        modalMessageContent.textContent = dataItemBox.dataset.additionalMessage;
+      });
+    });
+
+ closeBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      modal.classList.remove("open-modal");
+    });   
+
+ deleteAllSaleButton.addEventListener('click', () => {
+            axios.delete('/deleteAllSaleData')
+            .then(response => {
+                console.log(response.data)
+                tableOfBody.innerHTML = '';
+                alert('Data had been deleted!')
+            })
+            .catch(error => {
+                console.error(error);
+                alert('There is something wrong when delete data!');
+              });
+        })

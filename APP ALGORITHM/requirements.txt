@@ -1,0 +1,8 @@
+Flask==3.1.0
+Flask_Login==0.6.3
+flask_sqlalchemy==3.1.1
+mlxtend==0.23.1
+pandas==2.2.3
+psycopg2_binary==2.9.10
+SQLAlchemy==2.0.36
+Werkzeug==3.1.3

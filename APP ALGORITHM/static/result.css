@@ -1,0 +1,254 @@
+a {
+    text-decoration: none;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-color: #dad7cd;
+   
+    overflow-x: hidden;
+  }
+
+  .container {
+    background-color: azure;
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-container {
+    height: 75px;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    background-color: #faedcd;
+    z-index: 9999;
+  }
+
+  .nav-container p {
+    transform: translate(272px, -3px);
+    font-size: 25px;
+    color: #6c757d;
+    font-weight: bold;
+  }
+
+  .nav-container img {
+    width: 35px;
+    transform: translate(0px, 5px);
+  }
+
+  .nav-bottom {
+    background-color: #ffe6a7;
+    height: 55px;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    right: 0px;
+    top: 75px;
+    left: 0px;
+    z-index: 9999;
+  }
+
+  .nav-bottom p {
+    transform: translate(272px, -7px);
+    font-weight: lighter;
+    font-size: 20px;
+    color: #6c757d;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ca6702;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    row-gap: 1rem;
+    z-index: 9999;
+    transition: all 0.3s linear;
+    width: 45px;
+  }
+
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+  }
+
+  .sidebar-header a {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 45px;
+    color: white;
+  }
+
+  .side-text a {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    display: block;
+    font-size: 20px;
+    text-transform: capitalize;
+    padding: 1rem 1.5rem;
+    color: white;
+    transition: all 0.3s linear;
+  }
+
+  .side-text,
+  ::after,
+  ::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .side-text a:hover {
+    background: #ee9b00;
+    color: white;
+    padding-left: 1.75rem;
+  }
+
+  .side-text ul li a img {
+    size: 32px;
+  }
+
+  .side-text .logo {
+    width: 12%;
+    transform: translate(0px, 3px);
+  }
+
+  .btnLogout {
+    position: absolute;
+    top: 20px;
+    right: 57px;
+    border-radius: 5px;
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .tableOfItem {
+    transform: translate(24px, 25px);
+  }
+
+  .tableOfItem table {
+    border-collapse: collapse;
+    width: 95%;
+  }
+  
+  .tableOfItem th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+
+  .deleteInputDataBtn {
+    transform: translate(965px, -40px);
+  }
+  
+  .tableOfItem tr:first-child td {
+    background-color: #ccc; 
+  }
+  
+  .tableOfItem th {
+    background-color: #f0f0f0;
+  }
+
+  .resultAssociationtTitle,
+    h3 {
+      transform: translate(552px, 100px);
+    }
+    table {
+      border-collapse: collapse;
+      border-radius: 5px;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      font-family: "Quicksand", sans-serif;
+      font-weight: bold;
+      font-size: 12px;
+      transform: translate(552px, 90px);
+      gap: 25px;
+    }
+
+    th {
+      background: #ccc;
+      color: #000;
+      text-align: left;
+      padding: 8px;
+    }
+
+    th,
+    td {
+      padding: 10px, 20px;
+      text-align: center;
+    }
+
+    tr td{
+      background-color: white;
+    }
+
+
+  @media screen and (min-width: 676px) {
+    .sidebar {
+      width: 250px;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+
+    /* For tablets and smaller screens */
+    .container {
+      max-width: 80%;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      font-size: 14px;
+    }
+
+    button {
+      padding: 8px 12px;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+
+    /* For mobile phones */
+    .container {
+      max-width: 90%;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      font-size: 12px;
+    }
+
+    button {
+      padding: 6px 10px;
+    }
+  }

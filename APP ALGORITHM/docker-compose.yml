@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: $73ven$
+      POSTGRES_DB: Apriori
+    ports:
+      - "5432:5432"
+
+  flask_app:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      DB_URL: postgresql://postgres:$73ven$@db:5432/Apriori

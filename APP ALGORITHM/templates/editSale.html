@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDIT SALE</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='editSale.css')}}"
+    />
+    <link rel="icon" href="{{ url_for('static', filename='images/flask-logo.svg') }}" type="image/x-icon"> 
+    
+</head>
+
+<body>
+
+    {% if sale %}
+    <form action="/editSale/{{ sale.id }}" method="POST">
+        <div class="update-modal-container">
+            <h3>Update Transaction Data</h3>
+            <div class="input-item-position">
+                <input type="hidden" name="soldId" value="{{ sale.id }}"> 
+                <input type="text" name="transaction" placeholder="Input Transaction" value="{{ sale.transaction }}" required>
+                <input type="text" name="items" placeholder="Input Items" value="{{ sale.item }}" required>
+                <input type="text" name="dateTime" placeholder="Input Date Time" value="{{ sale.date_time }}" required>
+                <input type="text" name="periodDay" placeholder="Input Period Day" value="{{ sale.period_day }}" required>
+                <input type="text" name="weekendWeekday" placeholder="Input Weekend Weekday" value="{{ sale.weekday_weekend }}" required>
+            </div>
+            <div class="add-items-position">
+                <button type="submit" class="update-accept-btn">ACCEPT</button>
+                <button type="button" class="update-close-btn" onclick="window.location.href='/sale';">CANCEL</button> 
+            </div>
+        </div>
+    </form>
+  {% else %}
+    <form action="/sale" method="POST"> 
+        <div class="update-modal-container">
+            <h3>Add Transaction Data</h3> 
+            <div class="input-item-position">
+                <input type="text" name="transaction" placeholder="Input Transaction" required>
+                <input type="text" name="items" placeholder="Input Items" required>
+                <input type="text" name="dateTime" placeholder="Input Date Time" required>
+                <input type="text" name="periodDay" placeholder="Input Period Day" required>
+                <input type="text" name="weekendWeekday" placeholder="Input Weekend Weekday" required>
+            </div>
+            <div class="add-items-position">
+                <button type="submit" class="update-accept-btn">ACCEPT</button>
+                <button type="button" class="update-close-btn" onclick="window.location.href='/sale';">CANCEL</button> 
+            </div>
+        </div>
+    </form>
+  {% endif %}
+
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Predicted</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='process.css')}}"
+    />
+    <link rel="icon" href="{{ url_for('static', filename='images/flask-logo.svg') }}" type="image/x-icon">   
+
+  </head>
+  <body>
+
+    <div class="navbar">
+      <div class="nav-container">
+        <p>
+          <img
+            src="{{url_for('static',filename='images/repeat2.svg')}}"
+            alt=""
+          />
+          Predicted Page
+        </p>
+        <div class="btnLogout">
+          <button id="logoutButton" style="background-color: rgb(248, 67, 67); border-radius:32px;">
+            <img style="width: 18px;" src="{{url_for('static',filename='/images/logout-svgrepo-com.png')}}" class="logo">
+            Logout
+          </button>
+        </div>
+      </div>
+      
+    </div>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <img style="width: 202px; height: 82px; border-radius: 5px;" src="{{url_for('static',filename='/images/diamond_swalayan_logo.png')}}" class="logo">
+      </div>
+      <ul class="side-text">
+        <hr width="80%" />
+        <li>
+          <a href="" id="mainPage" style="font-weight: lighter"
+            ><img
+              src="{{url_for('static', filename='images/home.svg')}}"
+              class="logo"
+              alt=""
+            />
+            Main</a
+          >
+        </li>
+        <hr width="80%" />
+        <li>
+          <a href="" id="soldDataPage" style="font-weight: lighter"
+            ><img
+              src="{{url_for('static', filename='images/sale.svg')}}"
+              class="logo"
+              alt=""
+            />
+            Sale</a
+          >
+        </li>
+        <li>
+          <a href="" id="processDataPage" style="font-weight: lighter"
+            ><img
+              src="{{url_for('static', filename='images/repeat.svg')}}"
+              class="logo"
+              alt=""
+            />
+            Predicted</a
+          >
+        </li>
+        <li>
+          <a href="" id="adminDashboardPage" style="font-weight: lighter"
+            ><img
+              src="{{url_for('static', filename='images/admin.svg')}}"
+              class="logo"
+              alt=""
+            />
+            Admin</a
+          >
+        </li>
+        <hr width="80%" />
+       
+      </ul>
+    </aside>
+
+    <form
+      method="POST"
+      id="processForm"
+      enctype="multipart/form-data"
+      action="/calculateApriori"
+      class="processApriori"
+    >
+      <div class="processDateTime">
+        <div class="guideAprioriProcess">
+          <button
+            class="guideAprioriBTN"
+            style="background-color: rgb(255, 128, 0)"
+          >
+            Guide
+          </button>
+        </div>
+        <p>Please input transaction data:</p>
+        <input type="file" name="csv_file" id="csv_file" />
+      </div>
+      <div class="processSupportConfidenceApriori">
+        <div class="processInputSupportConfidence">
+          <div>
+            <label for="">Input Rows Value</label>
+            <input
+            type="text"
+            name="inputValueData"
+            placeholder="Input Rows"
+            required 
+            aria-describedby="input-help"
+          /> 
+          <span id="input-help" class="tooltip">Mohon isi kolom berikut untuk menentukan jumlah baris transaksi.</span>
+          </div>
+          <div>
+            <label for="">Transaction Value</label>
+            <input
+            type="text"
+            name="inputValueTransaction"
+            placeholder="Transaction Value"
+            required 
+            aria-describedby="input-help"
+          />
+          <span id="input-help" class="tooltip">Mohon isi kolom berikut untuk menentukan jumlah berapa banyak barang pada transaksi.</span>
+          </div>  
+          <div>
+            <label for="">Item Count</label>
+            <input
+            type="text"
+            name="inputValueItemCount"
+            placeholder="Transaction Count"
+            required 
+            aria-describedby="input-help"
+          />
+          <span id="input-help" class="tooltip">Mohon isi kolom berikut untuk menentukan jumlah berapa banyak barang pada transaksi.</span>
+          </div> 
+          <div>
+            <label for="">Support Value</label>
+            <input
+            type="text"
+            name="inputValueSupport"
+            placeholder="Min Support"
+            required 
+            aria-describedby="input-help"
+          />
+          <span id="input-help" class="tooltip">Mohon isi kolom berikut untuk menentukan minimum support pada transaksi.</span>
+          </div>
+          <div>
+            <label for="">Frequent Items</label> 
+            <input
+            type="text"
+            name="inputFrequentItems"
+            placeholder="Frequent Items"
+            required 
+            aria-describedby="input-help"
+          />
+          <span id="input-help" class="tooltip">Mohon isi kolom berikut untuk menentukan jumlah Frekuensi barang pada transaksi.</span>
+          </div>
+          <div>
+            <label for="">Min Rules</label> 
+            <input
+            type="text"
+            name="inputValueRules"
+            placeholder="Min Rules"
+            required 
+            aria-describedby="input-help"
+          />
+          <span id="input-help" class="tooltip">Mohon isi kolom berikut untuk menentukan jumlah Minimum rulesnya.</span>
+          </div>  
+        </div>
+        <div class="processBtn">
+          <button
+            type="submit"
+            id="csvForm"
+            style="background-color: #57cc99; color: white; height: 35px; border-radius: 32px;"
+          >
+            Process
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="apriori-guide-modal-overlay">
+      <div class="apriori-guide-modal-container">
+        <h3>NOTE:</h3>
+        <p>
+          The Apriori calculation form is a very useful tool for finding
+          association patterns in transaction data. How to use it is simple,
+          make sure your file format is csv and has 6 columns, namely
+          transactions, items, date_time, period_day, and weekend_weekday. then
+          enter the value in each input for the min-support input must be
+          decimal and the min-threshold value must be below 10 so that the
+          association pattern can be generated.
+        </p>
+        <button class="apriori-guide-close-btn">❌</button>
+      </div>
+    </div>
+
+    <script>
+
+      const modalBtn = document.querySelector(".guideAprioriBTN");
+      const modal = document.querySelector(".apriori-guide-modal-overlay");
+      const closeBtn = document.querySelector(".apriori-guide-close-btn");
+
+      modalBtn.addEventListener("click", function () {
+        event.preventDefault();
+        modal.classList.add("open-modal");
+      });
+
+      closeBtn.addEventListener("click", function () {
+        event.preventDefault();
+        modal.classList.remove("open-modal");
+      });
+
+      document
+        .getElementById("logoutButton")
+        .addEventListener("click", function () {
+          window.location.href = "/logout";
+        });
+
+      document
+        .getElementById("mainPage")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          window.location.href = "/home";
+        });
+
+      document
+        .getElementById("soldDataPage")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          window.location.href = "/sale";
+        });
+
+      document
+        .getElementById("adminDashboardPage")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          window.location.href = "/admin";
+        });
+    </script>
+  </body>
+</html>
